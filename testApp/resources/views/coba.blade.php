@@ -42,5 +42,11 @@
     
     <x-alert message="lorem ipsum" type="danger"/>
     <x-alert message="success" type="success"/>
+
+    <x-badge type="danger">
+        <x-slot:header>BADGE</x-slot:header>
+        <em>ini adalah badge</em>
+        <img src="#"/>
+    </x-badge>
 </body>
 </html>

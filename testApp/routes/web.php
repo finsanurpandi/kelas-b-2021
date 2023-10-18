@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/coba', [CobaController::class, 'coba']);
-
+Route::view('contoh', 'contoh')->name('contoh');
 Route::get('test/{name?}', function ($name = null) {
     // return view('welcome.welcome');
     if($name == null) {
