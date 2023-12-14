@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Http\Requests\StoreLectureRequest;
 use App\Http\Requests\UpdateLecturerRequest;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+
 class LecturerController extends Controller
 {
     public function index()
@@ -22,6 +25,8 @@ class LecturerController extends Controller
         // echo "<pre>";
         // print_r($lecturers);
         // echo "</pre>";
+
+        $data['user'] = auth()->user();
         return view('lecturer.index', $data);
     }
 
@@ -120,5 +125,25 @@ class LecturerController extends Controller
         $data['users'] = User::find(2);
 
         return view('lecturer.student', $data);
+    }
+
+    //Mail
+    public function testMail()
+    {
+        $lecturer = Lecturer::find('1723515959');
+        $subject = rand(0000000000, 9999999999);
+
+        $penerima = [
+            'penerima1@mail.com',
+            'penerima2@mail.com',
+            'penerima3@mail.com',
+            'penerima4@mail.com',
+            'penerima5@mail.com',
+        ];
+
+        foreach($penerima as $pen)
+        {
+            Mail::to($pen)->queue(new TestMail($lecturer, $subject));
+        }        
     }
 }
